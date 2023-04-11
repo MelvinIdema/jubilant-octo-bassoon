@@ -1,0 +1,42 @@
+{
+  "name": "infinity-ink",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm run build",
+    "dev": "nodemon index.js & npm run watch",
+    "start": "node index.js",
+    "prebuild": "rimraf ./static",
+    "build": "npm-run-all build:*",
+    "build:assets": "node scripts/build-assets.js",
+    "build:css": "node scripts/build-css.js",
+    "build:js": "node scripts/build-js.js",
+    "watch": "chokidar 'src/**/*.*' --command 'npm run build:assets' & chokidar 'src/css/*.css' --command 'npm run build:css' & chokidar 'src/js/*.js' --command 'npm run build:js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MelvinIdema/jubilant-octo-bassoon.git"
+  },
+  "author": "Stein Bergervoet, Jeffrey Ullers & Melvin Idema",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MelvinIdema/jubilant-octo-bassoon/issues"
+  },
+  "homepage": "https://github.com/MelvinIdema/jubilant-octo-bassoon#readme",
+  "devDependencies": {
+    "chokidar-cli": "^3.0.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-minify": "^3.1.0",
+    "nodemon": "^2.0.22",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^5.0.0"
+  },
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2"
+  }
+}
