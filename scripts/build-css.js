@@ -5,7 +5,7 @@ const minify = require("gulp-minify");
 const autoprefixer = require("gulp-autoprefixer");
 
 return gulp
-  .src(["./src/css/index.css"])
+  .src(["./src/css/*.css"])
   .pipe(cleanCSS())
   .pipe(minify())
   .pipe(

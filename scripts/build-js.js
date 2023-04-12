@@ -3,5 +3,4 @@ const minify = require("gulp-minify");
 const concat = require("gulp-concat");
 
 return gulp.src(["./src/js/*.js"])
-  .pipe(minify())
   .pipe(gulp.dest("./static/"));
