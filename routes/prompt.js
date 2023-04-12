@@ -5,6 +5,7 @@ require('dotenv').config();
 
 const bodyParser = require("body-parser");
 const { savePoem } = require("../app/controllers/PoemController");
+const { create, toDataURL } = require("qrcode");
 
 prompt.use(bodyParser.urlencoded({ extended: false }));
 prompt.use(bodyParser.json());
@@ -29,8 +30,9 @@ prompt.post('/prompt', async (req, res) => {
       throw new Error(`HTTP error ${response.status}`);
     }
     const data = await response.json();
-    savePoem(data.data.paragraph);
-    res.json({ poem: data.data.paragraph });
+    const poemID = await savePoem(data.data.paragraph);
+    const poemQR = await toDataURL("https://proompt.nicecock.eu/poem" + poemID);
+    res.json({ poem: data.data.paragraph, poemQR: poemQR.toString() });
   } catch (error) {
     console.error("Er is een fout opgetreden:", error);
     res.status(500).json({ error: error.message });
