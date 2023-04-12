@@ -1,6 +1,6 @@
 const examplePoem = {
   paragraph:
-    "Op het groene veld vol passie, waar de voetbalhelden strijden. Schijnbeweging, tact en actie, het publiek kan zich verblijden. Schijnbeweging, tact en actie, het publiek kan zich verblijden. Schijnbeweging, tact en actie, het publiek kan zich verblijden.",
+    "Op het groene veld vol passie, waar de voetbalhelden strijden. Schijnbeweging, tact en actie, het publiek kan zich verblijden. Op het groene veld vol passie, waar de voetbalhelden strijden. Schijnbeweging, tact en actie, het publiek kan zich verblijden.",
   keywords: [
     {
       keyword: "voetbalhelden",
@@ -44,6 +44,9 @@ const examplePoem = {
     sentenceElements.forEach((sentenceElement) => {
       poem.appendChild(sentenceElement);
     });
+
+    poem.style.paddingTop = `calc(50vh - ${sentenceElements[0].offsetHeight / 2}px)`;
+    poem.style.paddingBottom = `calc(50vh - ${sentenceElements[sentenceElements.length - 1].offsetHeight / 2}px)`;
 
     startPoem(sentences);
   };
@@ -94,14 +97,17 @@ const examplePoem = {
   };
 
   const startPoem = (sentences) => {
+    const poemWrapper = document.querySelector(".poem-wrapper");
     const poem = document.querySelector(".poem");
+    const share = document.querySelector(".share");
     const childNodes = poem.childNodes;
-    let scrollY = 0;
+    const millisecondsPerChar = 75;
+    let scroll = 0;
     let timeout = 0;
 
     childNodes.forEach((child, i) => {
       if (i > 0) {
-        timeout += sentences[i - 1].length * 75;
+        timeout += sentences[i - 1].length * millisecondsPerChar;
       }
 
       setTimeout(() => {
@@ -109,8 +115,15 @@ const examplePoem = {
 
         if (i <= 0) return;
 
-        scrollY += childNodes[i - 1].offsetHeight;
-        window.scrollTo(0, scrollY);
+        // Increase the scroll distance by the height of the previous sentence
+        scroll += childNodes[i - 1].offsetHeight + 32;
+        poemWrapper.scrollTop = scroll;
+
+        if (i !== childNodes.length - 1) return;
+
+        setTimeout(() => {
+          share.classList.add("show");
+        }, 1000);
       }, timeout);
     });
   };
