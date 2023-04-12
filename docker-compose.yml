@@ -5,10 +5,10 @@ services:
     image: ghcr.io/melvinidema/jubilant-octo-bassoon:11-add-docker-and-cicd
     ports:
       - "6969:6969"
-    restart: unless_stopped
+    restart: unless-stopped
   db:
     image: mysql:8.0-debian
-    restart: unless_stopped
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: poems
