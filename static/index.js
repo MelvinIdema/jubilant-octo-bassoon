@@ -11,7 +11,6 @@ const toSimple = function () {
   simpleCup.animate({ d: simpleCupPoints }, 5000, mina.backout, toFancy);
 };
 toSimple();
-
 const examplePoem = {
   paragraph:
     "Op het groene veld vol passie, waar de voetbalhelden strijden. Schijnbeweging, tact en actie, het publiek kan zich verblijden. Schijnbeweging, tact en actie, het publiek kan zich verblijden. Schijnbeweging, tact en actie, het publiek kan zich verblijden.",
