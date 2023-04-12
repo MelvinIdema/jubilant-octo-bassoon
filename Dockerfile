@@ -9,4 +9,4 @@ RUN npm install
 RUN npm run build
 RUN npx prisma generate
 
-CMD [ "npm", "run", "start" ]
+CMD [ "sh", "-c", "/app/docker-entrypoint.sh" ]
