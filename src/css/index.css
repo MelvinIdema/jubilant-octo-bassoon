@@ -3,6 +3,10 @@
 :root {
   --black: #000;
   --white: #fff;
+
+  --bg-one: #f15156;
+  --bg-two: #721121;
+  --bg-rotation: 45deg;
 }
 
 *,
@@ -13,6 +17,10 @@ html {
   font-family: "Arimo", sans-serif;
 
   scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-one);
 }
 
 /* Poem */
@@ -42,4 +50,30 @@ html {
 
 .share {
   height: 100vh;
+}
+
+/* Blob */
+
+.blob-bg {
+  /* Gradient Background from blood red to a darker red with a brighter blob in the middle */
+  background-image: linear-gradient(var(--bg-rotation), var(--bg-one) 0%, var(--bg-two) 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.blob-bg-blob {
+  transform: translate(-50%, -50%);
+
+  position: fixed;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+
+  height: 85vh;
+
+  filter: blur(30px);
+}
+
+.blob-bg-blob path {
+  fill: url(#blob-shape-gradient) #fff;
 }
