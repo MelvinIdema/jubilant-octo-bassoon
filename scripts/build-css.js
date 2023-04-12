@@ -6,7 +6,6 @@ const autoprefixer = require("gulp-autoprefixer");
 
 return gulp
   .src(["./src/css/index.css"])
-  .pipe(concat("index.css"))
   .pipe(cleanCSS())
   .pipe(minify())
   .pipe(
