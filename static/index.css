@@ -1,1 +1,1 @@
-@import url(https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap);:root{--black:#000;--white:#fff}
+@import url(https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap);:root{--black:#000;--white:#fff}*,html{padding:0;margin:0;font-family:Arimo,sans-serif;scroll-behavior:smooth}.poem{padding:2rem}.poem>p{font-size:2rem;font-weight:700;text-shadow:0 0 0 var(--black);transition:text-shadow .5s ease-in-out}.poem>p:not(:last-child){padding-bottom:2rem}.poem>p.blur{color:transparent;text-shadow:0 0 .25rem var(--black)}.share{height:100vh}
