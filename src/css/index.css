@@ -3,4 +3,30 @@
 :root {
   --black: #000;
   --white: #fff;
+
+  --bg-one: #666D81;
+  --bg-two: #2E3341;
+  --bg-rotation: 45deg;
+}
+
+html, body { height: 100%; margin: 0; }
+
+.blob-bg {
+  /* Gradient Background from blood red to a darker red with a brighter blob in the middle */
+  background-image: linear-gradient(var(--bg-rotation), var(--bg-one) 0%, var(--bg-two) 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.blob-bg-blob {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  height: 85vh;
+  filter: blur(30px);
+}
+
+.blob-bg-blob path {
+  fill: url(#blob-shape-gradient) #fff;
 }
