@@ -31,7 +31,7 @@ prompt.post('/prompt', async (req, res) => {
     }
     const data = await response.json();
     const poemID = await savePoem(data.data.paragraph);
-    const poemQR = await toDataURL("https://proompt.nicecock.eu/poem" + poemID);
+    const poemQR = await toDataURL("https://proompt.nicecock.eu/poem/" + poemID);
     res.json({ poem: data.data.paragraph, poemQR: poemQR.toString() });
   } catch (error) {
     console.error("Er is een fout opgetreden:", error);
