@@ -2,7 +2,7 @@ version: '3'
 
 services:
   app:
-    image: ghcr.io/melvinidema/jubilant-octo-bassoon:11-add-docker-and-cicd
+    image: ghcr.io/melvinidema/jubilant-octo-bassoon:latest
     ports:
       - "6969:6969"
     restart: unless-stopped
