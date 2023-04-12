@@ -1,4 +1,3 @@
-
 const svg = document.getElementById("blob-bg-blob");
 const s = Snap(svg);
 const simpleCup = Snap.select('#blob-one');
@@ -12,3 +11,8 @@ const toSimple = function(){
   simpleCup.animate({ d: simpleCupPoints }, 5000, mina.backout, toFancy);
 }
 toSimple();
+(function() {
+
+  
+
+})();

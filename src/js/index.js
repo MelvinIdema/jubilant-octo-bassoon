@@ -1,4 +1,3 @@
-
 const svg = document.getElementById("blob-bg-blob");
 const s = Snap(svg);
 const simpleCup = Snap.select('#blob-one');
