@@ -9,8 +9,10 @@ app.use(express.static("static"));
 app.use(express.urlencoded({ extended: true }));
 
 const homeRoutes = require("./routes/home");
+const promptRoutes = require("./routes/prompt");
 
 app.use(homeRoutes);
+app.use(promptRoutes)
 
 app.use((req, res) => {
   res.status(404).send("Error 404");
