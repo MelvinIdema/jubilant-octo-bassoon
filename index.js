@@ -10,9 +10,11 @@ app.use(express.urlencoded({ extended: true }));
 
 const homeRoutes = require("./routes/home");
 const promptRoutes = require("./routes/prompt");
+const poemRoutes = require("./routes/poem");
 
 app.use(homeRoutes);
-app.use(promptRoutes)
+app.use(promptRoutes);
+app.use(poemRoutes);
 
 app.use((req, res) => {
   res.status(404).send("Error 404");

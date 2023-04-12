@@ -4,6 +4,7 @@ const fetch = require("node-fetch");
 require('dotenv').config();
 
 const bodyParser = require("body-parser");
+const { savePoem } = require("../app/controllers/PoemController");
 
 prompt.use(bodyParser.urlencoded({ extended: false }));
 prompt.use(bodyParser.json());
@@ -28,6 +29,7 @@ prompt.post('/prompt', async (req, res) => {
       throw new Error(`HTTP error ${response.status}`);
     }
     const data = await response.json();
+    savePoem(data.data.paragraph);
     res.json({ poem: data.data.paragraph });
   } catch (error) {
     console.error("Er is een fout opgetreden:", error);
