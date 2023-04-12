@@ -24,7 +24,24 @@ async function fetchPoem() {
       throw new Error(`HTTP error ${response.status}`);
     }
     const data = await response.json();
+    
     output.textContent = data.poem;
+    try {
+      // Remove all previous qr codes
+    document.querySelectorAll('.qrcodeimage').forEach(elem => {
+      elem.remove();
+    });
+
+    // Create new QR code
+    const qrcodeimage = document.createElement('img');
+    qrcodeimage.classList.add("qrcodeimage")
+    qrcodeimage.src = data.poemQR;
+    qrcodeimage.alt = "QR code for this poem";
+    // Add QR code to the page
+    output.appendChild(qrcodeimage);
+    } catch (error) {
+      console.log('joe')
+    }
   } catch (error) {
     console.error("Er is een fout opgetreden:", error);
   }
@@ -44,3 +61,4 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
+
