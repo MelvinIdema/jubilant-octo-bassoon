@@ -32,11 +32,41 @@ prompt.post('/prompt', async (req, res) => {
     const data = await response.json();
     const poemID = await savePoem(data.data.paragraph);
     const poemQR = await toDataURL("https://proompt.nicecock.eu/poem/" + poemID);
-    res.json({ poem: data.data.paragraph, poemQR: poemQR.toString() });
+    const fullData = await fetchSecondApiEndpoint(data.data.paragraph);
+
+    res.json({ poem: data.data.paragraph, poemQR: poemQR.toString(), poemID: poemID, keywords: fullData.keywords });
   } catch (error) {
     console.error("Er is een fout opgetreden:", error);
     res.status(500).json({ error: error.message });
   }
+
+
 });
+
+async function fetchSecondApiEndpoint(paragraph) {
+  const url = `https://dichter.responsible-it.nl/api/keywords`;
+  const headers = {
+    "Authorization": `Bearer ${process.env.API_KEY}`
+  };
+  const body = {
+    "data": {
+      "paragraph": paragraph
+    }
+  }
+
+  try {
+    const response = await fetch(url, { method: 'POST', headers, body: JSON.stringify(body) });
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`HTTP error ${response.status}: ${errorText}`);
+      throw new Error(`HTTP error ${response.status}`);
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (e) {
+    console.error("Er is een fout opgetreden:", error);
+    throw e;
+  }
+}
 
 module.exports = prompt;

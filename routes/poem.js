@@ -18,4 +18,8 @@ router.get("/poem/:poemId", async (req, res) => {
 	})
 })
 
+router.get("/select", async (req, res) => {
+  res.render("select");
+});
+
 module.exports = router;

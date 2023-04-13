@@ -1,14 +1,47 @@
 <%- include('partials/head') %>
-<!-- Jeffrey will style this later on -->
-<header>
-    <ul>
-        <!-- Hier komen de prompts in  -->
-    </ul>
-</header>
-<main class="home">
-  <section>
-    <h1>Poem</h1>
-		<p><%= paragraph %></p>
-  </section>
+
+<script>
+  let examplePoem = {
+    paragraph: "<%= paragraph %>",
+    keywords: []
+  };
+</script>
+
+<main>
+  <div class="logo">
+    <div></div>
+
+    <div></div>
+
+    <div></div>
+
+    <span>de stadsdichter</span>
+  </div>
+
+  <div class="poem-wrapper">
+    <section class="poem"></section>
+
+    <div class="share">
+      <div>
+        <img />
+      </div>
+
+      <div>
+        <img />
+      </div>
+    </div>
+  </div>
 </main>
+
+<section id="select__spinner">
+  <input type="text" id="selectedItemInput" value="" hidden disabled>
+  <section class="select">
+    <div class="select__container">
+      <div class="select__list" style="top: 0"></div>
+    </div>
+    <button class="select__submit">Kies dit woord</button>
+  </section>
+</section>
+
 <%- include('partials/footer') %>
+
