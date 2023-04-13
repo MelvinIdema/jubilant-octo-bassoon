@@ -1,5 +1,6 @@
 const express = require("express");
 const { getPoem } = require("../app/controllers/PoemController");
+const { toDataURL } = require("qrcode");
 const router = express.Router();
 
 router.get("/poem/:poemId", async (req, res) => {
@@ -13,6 +14,8 @@ router.get("/poem/:poemId", async (req, res) => {
 		return
 	}
 
+	const poemQR = await toDataURL("https://proompt.nicecock.eu/poem/" + poemID);
+
 	if (poem.keywords == null) {
 		res.render('poem', {
 			paragraph: poem.paragraph
@@ -20,7 +23,8 @@ router.get("/poem/:poemId", async (req, res) => {
 	} else {
 		res.render('poem', {
 			paragraph: poem.paragraph,
-			keywords: JSON.stringify(poem.keywords)
+			keywords: JSON.stringify(poem.keywords),
+			qrcodecode: poemQR.toString()
 		})
 	}
 })

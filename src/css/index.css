@@ -373,6 +373,7 @@ section {
 
 .show {
   display: grid;
+  backdrop-filter: blur(6px);
 }
 
 #select__spinner .backdrop {
