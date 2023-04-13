@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 const express = require("express");
 const prompt = express.Router();
 const fetch = require("node-fetch");
@@ -8,6 +8,8 @@ const { savePoem } = require("../app/controllers/PoemController");
 const { create, toDataURL } = require("qrcode");
 
 async function doFetch(url, headers) {
+  console.log("Calling API");
+
   const response = await fetch(url, { headers });
   if (!response.ok) {
     const errorText = await response.text();
@@ -19,8 +21,36 @@ async function doFetch(url, headers) {
   return { data, fullData };
 }
 
+const fetchWithFallback = async (url, headers) => {
+  try {
+    const result = await doFetch(url, headers);
+    return result;
+  } catch (error) {
+    console.error("Fetch failed:", error);
+    return null;
+  }
+};
+
+const firstSuccessfulFetch = async (promises) => {
+  if (promises.length === 0) {
+    throw new Error("All promises failed");
+  }
+
+  const result = await Promise.race(promises);
+  if (result !== null) {
+    return result;
+  } else {
+    // Get the failed promise and remove it from the list of promises
+    const remainingPromises = promises.filter(promise => promise !== Promise.resolve(result));
+
+    // const failedIndex = promises.findIndex(promise => promise === Promise.resolve(result));
+    // const remainingPromises = [...promises.slice(0, failedIndex), ...promises.slice(failedIndex + 1)];
+    return firstSuccessfulFetch(remainingPromises);
+  }
+};
+
 async function doRewriteFetch(url, headers, body) {
-  const response = await fetch(url, { method: 'POST', headers, body: JSON.stringify(body) });
+  const response = await fetch(url, { method: "POST", headers, body: JSON.stringify(body) });
   if (!response.ok) {
     const errorText = await response.text();
     console.error(`HTTP error ${response.status}: ${errorText}`);
@@ -34,26 +64,35 @@ async function doRewriteFetch(url, headers, body) {
 prompt.use(bodyParser.urlencoded({ extended: false }));
 prompt.use(bodyParser.json());
 
-prompt.get('/prompt', (req, res) => {
-  res.render('prompt');
+prompt.get("/prompt", (req, res) => {
+  res.render("prompt");
 });
 
-prompt.post('/prompt', async (req, res) => {
+prompt.post("/prompt", async (req, res) => {
   const type = req.body.type;
   const theme = req.body.theme;
   const url = `https://dichter.responsible-it.nl/api/poetry?type=${type}&theme=${encodeURIComponent(theme)}`;
   const headers = {
-    "Authorization": `Bearer ${process.env.API_KEY}`
+    Authorization: `Bearer ${process.env.API_KEY}`,
   };
 
   try {
-    const promise1 = doFetch(url, headers);
-    const promise2 = doFetch(url, headers);
+    // const promise1 = doFetch(url, headers);
+    // const promise1 = new Promise((resolve, reject) => {
+    //   throw new Error("test");
+    // });
 
-    const { data, fullData } = await Promise.race([promise1, promise2]).then((value) => {
-      console.log(value);
-      return value;
-    });
+    var promises = [];
+    for (let i = 0; i < 10; i++) {
+      promises.push(fetchWithFallback(url, headers));
+    }
+
+    const { data, fullData } = await firstSuccessfulFetch(promises);
+
+    // const { data, fullData } = await Promise.race([promise1, promise2]).then((value) => {
+    //   console.log(value);
+    //   return value;
+    // });
 
     const poemID = await savePoem(data.data.paragraph, fullData.keywords);
     const poemQR = await toDataURL("https://proompt.nicecock.eu/poem/" + poemID);
@@ -63,11 +102,9 @@ prompt.post('/prompt', async (req, res) => {
     console.error("Er is een fout opgetreden:", error);
     res.status(500).json({ error: error.message });
   }
-
-
 });
 
-prompt.post('/rewrite', async (req, res) => {
+prompt.post("/rewrite", async (req, res) => {
   console.log(req.body);
   const oldKeyword = req.body.oldKeyword;
   const newKeyword = req.body.newKeyword;
@@ -75,13 +112,13 @@ prompt.post('/rewrite', async (req, res) => {
 
   const url = `https://dichter.responsible-it.nl/api/rewrite?old=${oldKeyword}&new=${newKeyword}`;
   const headers = {
-    "Authorization": `Bearer ${process.env.API_KEY}`
+    Authorization: `Bearer ${process.env.API_KEY}`,
   };
   const body = {
-    "data": {
-      "paragraph": paragraph
-    }
-  }
+    data: {
+      paragraph: paragraph,
+    },
+  };
 
   try {
     const promise1 = doRewriteFetch(url, headers, body);
@@ -99,22 +136,21 @@ prompt.post('/rewrite', async (req, res) => {
     console.error("Er is een fout opgetreden:", error);
     res.status(500).json({ error: error.message });
   }
-
 });
 
 async function fetchSecondApiEndpoint(paragraph) {
   const url = `https://dichter.responsible-it.nl/api/keywords`;
   const headers = {
-    "Authorization": `Bearer ${process.env.API_KEY}`
+    Authorization: `Bearer ${process.env.API_KEY}`,
   };
   const body = {
-    "data": {
-      "paragraph": paragraph
-    }
-  }
+    data: {
+      paragraph: paragraph,
+    },
+  };
 
   try {
-    const response = await fetch(url, { method: 'POST', headers, body: JSON.stringify(body) });
+    const response = await fetch(url, { method: "POST", headers, body: JSON.stringify(body) });
     if (!response.ok) {
       const errorText = await response.text();
       console.error(`HTTP error ${response.status}: ${errorText}`);
