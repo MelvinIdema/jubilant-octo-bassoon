@@ -52,7 +52,7 @@ if (poemForm) {
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    const ulElement = document.querySelector("section ul");
+    const ulElement = document.querySelector("main.home section:first-of-type ul");
     const inputField = document.getElementById("theme");
     inputField.addEventListener("input", (event) => {
       const theme = event.target.value;
