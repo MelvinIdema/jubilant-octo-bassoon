@@ -31,7 +31,7 @@ prompt.post('/prompt', async (req, res) => {
     }
     const data = await response.json();
     const fullData = await fetchSecondApiEndpoint(data.data.paragraph);
-    const poemID = await savePoem(data.data.paragraph, fullData.keywords);
+    const poemID = await savePoem(data.data.paragraph, fullData.keywords, type);
     const poemQR = await toDataURL("https://proompt.nicecock.eu/poem/" + poemID);
 
     res.json({ poem: data.data.paragraph, poemQR: poemQR.toString(), poemID: poemID, keywords: fullData.keywords });
