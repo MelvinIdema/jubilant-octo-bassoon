@@ -27,7 +27,7 @@ if (poemForm) {
       }
       const data = await response.json();
 
-      document.location = "/poem/" + data.poemID;
+      document.location = "/poem/" + data.poemID + "?create";
       output.textContent = data.poem;
       try {
         // Remove all previous qr codes

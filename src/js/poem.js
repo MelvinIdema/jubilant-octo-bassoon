@@ -7,6 +7,44 @@ let startMousePosY = 0;
 let isDoneWithScrolling = false;
 let oldKeyword = "";
 
+async function fetchPoem(newKeyword, oldKeyword, paragraph) {
+  try {
+    const response = await fetch("/rewrite", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ oldKeyword, newKeyword, paragraph }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error ${response.status}`);
+    }
+    const data = await response.json();
+
+    document.location = "/poem/" + data.poemID + "?create";
+    output.textContent = data.poem;
+    try {
+      // Remove all previous qr codes
+      document.querySelectorAll(".qrcodeimage").forEach(elem => {
+        elem.remove();
+      });
+
+      // Create new QR code
+      const qrcodeimage = document.createElement("img");
+      qrcodeimage.classList.add("qrcodeimage");
+      qrcodeimage.src = data.poemQR;
+      qrcodeimage.alt = "QR code for this poem";
+      // Add QR code to the page
+      output.appendChild(qrcodeimage);
+    } catch (error) {
+      console.log("joe");
+    }
+  } catch (error) {
+    console.error("Er is een fout opgetreden:", error);
+  }
+}
+
 function showSpinner(alternatives) {
   const _selectList = document.querySelector(".select__list");
   _selectList.innerHTML = "";
@@ -101,10 +139,7 @@ function blurItemBasedOnDistanceFromMiddle() {
 
 async function submit() {
     const newKeyword = selectedItemInput.value;
-    console.log(newKeyword, oldKeyword);
-
-
-
+    await fetchPoem(newKeyword, oldKeyword, examplePoem.paragraph);
 }
 
 const selectSubmit = document.querySelector(".select__submit");
@@ -206,6 +241,10 @@ const startPoem = (sentences) => {
 
     setTimeout(() => {
       child.classList.remove("blur");
+
+      if(!document.querySelector('p.blur')) {
+        isDoneWithScrolling = true;
+      }
 
       if (i <= 0) return;
 

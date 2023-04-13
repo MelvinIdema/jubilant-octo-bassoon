@@ -8,6 +8,7 @@ app.set("view engine", "ejs");
 app.use(express.static("static"));
 app.use(express.urlencoded({ extended: true }));
 
+
 const homeRoutes = require("./routes/home");
 const promptRoutes = require("./routes/prompt");
 const poemRoutes = require("./routes/poem");
