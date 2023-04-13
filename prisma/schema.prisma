@@ -13,4 +13,5 @@ datasource db {
 model Poem {
   id String @id @default(uuid())
   paragraph String @db.Text
+  keywords Json? @db.Json
 }

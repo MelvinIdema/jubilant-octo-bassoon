@@ -13,9 +13,16 @@ router.get("/poem/:poemId", async (req, res) => {
 		return
 	}
 
-	res.render('poem', {
-		paragraph: poem
-	})
+	if (poem.keywords == null) {
+		res.render('poem', {
+			paragraph: poem.paragraph
+		})
+	} else {
+		res.render('poem', {
+			paragraph: poem.paragraph,
+			keywords: JSON.stringify(poem.keywords)
+		})
+	}
 })
 
 router.get("/select", async (req, res) => {

@@ -3,10 +3,11 @@ const prisma = new PrismaClient()
 
 // The poem parameter is the text in the paragraph
 // Returns the id of the poem
-async function savePoem(poem) {
+async function savePoem(poem, keywords) {
 	const poemEntry = await prisma.poem.create({
 		data: {
-			paragraph: poem
+			paragraph: poem,
+			keywords: keywords
 		}
 	});
 
@@ -26,7 +27,10 @@ async function getPoem(id) {
 		return null;
 	}
 
-	return poem.paragraph;
+	return {
+		paragraph: poem.paragraph,
+		keywords: poem.keywords
+	}
 }
 
 module.exports = {
