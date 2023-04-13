@@ -1,11 +1,14 @@
 <%- include('partials/head') %>
 <!-- Jeffrey will style this later on -->
-<header>
-    <ul>
-        <!-- Hier komen de prompts in  -->
-    </ul>
-</header>
 <main class="home">
+  <section>
+    <ul>
+      <!-- Hier komen de prompts in  -->
+    </ul>
+  </section>
+  <section>
+    <div class="output"></div>
+  </section>
   <section>
     <h1>prompt</h1>
     <form id="poemForm">
@@ -28,7 +31,9 @@
         <input type="text" id="theme" placeholder="mooi bos, warme zomerdag">
         <button type="submit">Genereer gedicht</button>
       </form>
-      <div class="output"></div>
   </section>
 </main>
+<div class="loadingscren">
+  <div class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+</div>
 <%- include('partials/footer') %>
