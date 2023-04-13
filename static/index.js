@@ -9,5 +9,15 @@ const toFancy = function () {
 };
 const toSimple = function () {
   simpleCup.animate({ d: simpleCupPoints }, 5000, mina.backout, toFancy);
+<<<<<<< HEAD
 };
 toSimple();
+=======
+}
+toSimple();
+(function() {
+
+  
+
+})();
+>>>>>>> 3-loading-state-weergeven-van-een-vorig-gedicht
