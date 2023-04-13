@@ -160,11 +160,11 @@ main {
   color: #fff
 }
 
-button,
-input,
-label,
-option,
-select {
+.home button,
+.home input,
+.home label,
+.home option,
+.home select {
   color: var(--black)
 }
 
@@ -176,7 +176,7 @@ main.home {
   overflow: hidden
 }
 
-section:nth-of-type(2) {
+main.home section:nth-of-type(2) {
   width: 70%;
   margin: 0 auto;
   padding: 1em;
@@ -186,7 +186,7 @@ section:nth-of-type(2) {
   max-height: 50dvh
 }
 
-ul {
+main.home section ul {
   list-style: none;
   padding: unset;
   display: flex;
@@ -195,7 +195,7 @@ ul {
   margin: 1em
 }
 
-ul li {
+main.home section ul li {
   background: rgb(0 0 0 /.5);
   padding: 1em 2em;
   color: var(--white);
@@ -211,11 +211,11 @@ section:nth-of-type(2) img {
   margin-top: 1em
 }
 
-section:first-of-type {
+main.home section:first-of-type {
   max-height: 40dvh
 }
 
-section:last-of-type {
+main.home section:last-of-type {
   display: flex;
   flex-direction: row
 }
@@ -237,12 +237,12 @@ form#poemForm label {
   display: none
 }
 
-select#type {
+form#poemForm select#type {
   flex: 1 1 11em;
   height: 4em
 }
 
-input#theme {
+form#poemForm input#theme {
   flex: 1 1 49em
 }
 
