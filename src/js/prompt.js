@@ -11,6 +11,7 @@ if (poemForm) {
   });
 
   async function fetchPoem() {
+    showLoader();
     const type = typeSelect.value;
     const theme = themeInput.value;
 
@@ -51,7 +52,7 @@ if (poemForm) {
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    const ulElement = document.querySelector("header ul");
+    const ulElement = document.querySelector("section ul");
     const inputField = document.getElementById("theme");
     inputField.addEventListener("input", (event) => {
       const theme = event.target.value;

@@ -8,6 +8,7 @@ let isDoneWithScrolling = false;
 let oldKeyword = "";
 
 async function fetchPoem(newKeyword, oldKeyword, paragraph) {
+  showLoader();
   try {
     const response = await fetch("/rewrite", {
       method: "POST",

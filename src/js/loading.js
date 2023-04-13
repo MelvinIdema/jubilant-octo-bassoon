@@ -1,7 +1,7 @@
 const loader = document.getElementById("loader");
 function showLoader() {
-  loader.style.display = "block";
+  loader.classList.add('show')
 }
 function hideLoader() {
-  loader.style.display = "none";
+  loader.classList.remove('show');
 }
