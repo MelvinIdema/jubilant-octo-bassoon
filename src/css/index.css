@@ -87,7 +87,9 @@ main {
   font-weight: 700;
   color: var(--white);
   text-shadow: 0 0 0 var(--white);
-  transition: text-shadow .5s ease-in-out, opacity .5s ease-in-out
+  transition: text-shadow .5s ease-in-out, opacity .5s ease-in-out;
+  margin: unset;
+  line-height: 1.5em
 }
 
 .poem>p.blur {
@@ -107,30 +109,22 @@ main {
 }
 
 .share {
-  transform: translateX(-50%);
-  opacity: 0;
-  display: flex;
-  -moz-column-gap: 2rem;
-  column-gap: 2rem;
   position: absolute;
-  bottom: 0;
-  left: calc(50%);
-  transition: transform .3s ease-in-out, opacity .3s ease-in-out
+  bottom: 1em;
+  left: 6.25%;
+  transform: translateX(-50%);
 }
 
-.share.show {
-  transform: translate(-50%, -4rem);
-  opacity: 1
-}
+.share.show {}
 
 .share>div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 8rem;
-  height: 8rem;
-  border-radius: 50%;
-  background-color: var(--white)
+  /* display:flex; */
+  /* align-items:center; */
+  /* justify-content:center; */
+  /* width:8rem; */
+  /* height:8rem; */
+  /* border-radius:50%; */
+  /* background-color:var(--white); */
 }
 
 .blob-bg {
@@ -373,5 +367,10 @@ section {
 
 .show {
   display: grid;
-  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px)
+}
+
+.share img {
+  width: 4em;
 }
