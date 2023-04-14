@@ -1,36 +1,48 @@
 <%- include('partials/head') %>
 <!-- Jeffrey will style this later on -->
 <main class="home">
+  <div class="logo">
+    <div></div>
+
+    <div></div>
+
+    <div></div>
+
+    <span>de stadsdichter</span>
+  </div>
+
   <section>
-    <ul>
-      <!-- Hier komen de prompts in  -->
+    <ul class="prompts-wrapper">
+      <!-- Prompts  -->
     </ul>
   </section>
+
   <section>
-    <div class="output"></div>
-  </section>
-  <section>
-    <h1>prompt</h1>
     <form id="poemForm">
-        <label for="type">Kies een gedichttype:</label>
-        <select id="type">
-          <option value="1">Limerick</option>
-          <option value="2">Elevenie</option>
-          <option value="3">Ollekebolleke</option>
-          <option value="4">Snelsonnet</option>
-          <option value="5">Haiku</option>
-          <option value="6">Romantisch drama plot</option>
-          <option value="7">Tragedie plot</option>
-          <option value="8">Manifest</option>
-          <option value="9">Essay</option>
-          <option value="10">Six word story</option>
-          <option value="11">Toneel opening tragedie</option>
-          <option value="12">Toneel opening komedie</option>
-        </select>
-        <label for="theme">Voer een thema in:</label>
-        <input type="text" id="theme" placeholder="mooi bos, warme zomerdag">
-        <button type="submit">Genereer gedicht</button>
-      </form>
+      <label for="type">Gedicht type:</label>
+
+      <select id="type">
+        <option value="1">Limerick</option>
+        <option value="2">Elevenie</option>
+        <option value="3">Ollekebolleke</option>
+        <option value="4">Snelsonnet</option>
+        <option value="5">Haiku</option>
+        <option value="6">Romantisch drama plot</option>
+        <option value="7">Tragedie plot</option>
+        <option value="8">Manifest</option>
+        <option value="9">Essay</option>
+        <option value="10">Six word story</option>
+        <option value="11">Toneel opening tragedie</option>
+        <option value="12">Toneel opening komedie</option>
+      </select>
+
+      <label for="theme">Thema's (scheid meerdere thema's met een komma):</label>
+
+      <input type="text" id="theme" placeholder="mooi bos, warme zomerdag" />
+
+      <button type="submit">Genereer gedicht</button>
+    </form>
   </section>
 </main>
+
 <%- include('partials/footer') %>
