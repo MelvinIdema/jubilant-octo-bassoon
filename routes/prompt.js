@@ -32,16 +32,21 @@ const fetchWithFallback = async (url, headers) => {
 };
 
 const firstSuccessfulFetch = async (promises) => {
+  console.log("Calling firstSuccessfulFetch");
+
   if (promises.length === 0) {
     throw new Error("All promises failed");
   }
 
-  const result = await Promise.race(promises);
+  const indexedPromises = promises.map((promise, index) => promise.then(result => ({ result, index })));
+  const { result, index } = await Promise.race(indexedPromises);
   if (result !== null) {
+    console.log("Promise" + index + " succeeded");
     return result;
   } else {
+    console.log("Promise" + index + " failed");
     // Get the failed promise and remove it from the list of promises
-    const remainingPromises = promises.filter(promise => promise !== Promise.resolve(result));
+    const remainingPromises = [...promises.slice(0, index), ...promises.slice(index + 1)];
 
     // const failedIndex = promises.findIndex(promise => promise === Promise.resolve(result));
     // const remainingPromises = [...promises.slice(0, failedIndex), ...promises.slice(failedIndex + 1)];
