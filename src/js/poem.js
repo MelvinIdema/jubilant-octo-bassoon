@@ -272,6 +272,6 @@ const handleClick = (e) => {
 
 init();
 
-document.querySelector('.backdrop').addEventListener('click', () => {
-  document.getElementById('select__spinner').style.display = 'none';
-});
+// document.querySelector('.backdrop').addEventListener('click', () => {
+//   document.getElementById('select__spinner').style.display = 'none';
+// });

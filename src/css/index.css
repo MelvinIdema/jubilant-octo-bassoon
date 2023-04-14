@@ -69,7 +69,7 @@ main {
   display: flex;
   justify-content: center;
   height: 100vh;
-  scroll-behavior: smooth;
+  scroll-behavior: smooth
 }
 
 .poem {
@@ -79,7 +79,7 @@ main {
   row-gap: 2rem;
   height: -moz-fit-content;
   height: fit-content;
-  width: 75%;
+  width: 75%
 }
 
 .poem>p {
@@ -338,7 +338,7 @@ section {
   left: 0;
   height: 100vh;
   width: 100vw;
-  background: rgb(0 0 0 /.5);
+  background: rgb(0 0 0 /.8);
   content: '';
   z-index: -1
 }
@@ -379,4 +379,60 @@ section {
 
 .select {
   z-index: 9999
+}
+
+.loaderContainer {
+  position: absolute;
+  width: 100%;
+  bottom: 1em;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  display: none
+}
+
+.loaderContainer ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  background: rgb(0 0 0 /.5);
+  padding: 1em;
+  border-radius: .5em
+}
+
+.loaderContainer ul li {
+  display: none
+}
+
+.loaderContainer ul li.active {
+  display: flex
+}
+
+.loaderContainer button {
+  color: var(--black);
+  border: none;
+  padding: 1em;
+  border-radius: .5em;
+  margin-top: .5em
+}
+
+.loaderContainer.show {
+  display: flex;
+  -webkit-backdrop-filter: unset;
+  backdrop-filter: unset;
+  z-index: 9999;
+  align-items: center
+}
+
+.loaderContainer ul {
+  right: 1em;
+  position: relative;
+  max-width: 70vw;
+}
+
+.loaderContainer>div {
+  left: 1em;
+  position: relative;
+  display: flex;
+  gap: 1em
 }
