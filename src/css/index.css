@@ -36,28 +36,28 @@ main {
   row-gap: 1rem;
 }
 
-.logo > div {
+.logo>div {
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 50%;
   background-color: var(--white);
 }
 
-.logo > div:nth-child(1) {
+.logo>div:nth-child(1) {
   width: 1.25rem;
   height: 1.25rem;
   border: 0.125rem solid var(--white);
   background-color: transparent;
 }
 
-.logo > div:nth-child(2) {
+.logo>div:nth-child(2) {
   width: 1.25rem;
   height: 1.25rem;
   border: 0.125rem solid var(--white);
   background: linear-gradient(to top, #fff 0, #fff 50%, transparent 50%, transparent 100%);
 }
 
-.logo > span {
+.logo>span {
   color: var(--white);
   font-size: 1.5rem;
   line-height: 1;
@@ -82,7 +82,7 @@ main {
   width: 75%;
 }
 
-.poem > p {
+.poem>p {
   opacity: 1;
   font-size: 4rem;
   font-weight: 700;
@@ -93,19 +93,19 @@ main {
   line-height: 1.5em;
 }
 
-.poem > p.blur {
+.poem>p.blur {
   opacity: 0.5;
   color: transparent;
   text-shadow: 0 0 0.25rem var(--white);
 }
 
-.poem > p > span {
+.poem>p>span {
   border-radius: 0.5rem;
   color: var(--black);
   background-color: var(--white);
 }
 
-.poem > p.blur > span {
+.poem>p.blur>span {
   filter: blur(0.25rem);
 }
 
@@ -226,7 +226,7 @@ form#poemForm input#theme {
   font-size: 2rem;
 }
 
-form#poemForm > * {
+form#poemForm>* {
   border-radius: 0.5rem;
   border: 0;
 }
@@ -318,6 +318,7 @@ section {
 }
 
 @keyframes lds-grid {
+
   0%,
   100% {
     opacity: 1;
@@ -426,7 +427,7 @@ section {
   max-width: 70vw;
 }
 
-.loaderContainer > div {
+.loaderContainer>div {
   left: 1em;
   position: relative;
   display: flex;
@@ -449,9 +450,45 @@ section {
   background-color: var(--white);
 }
 
-.back-link > a {
+.back-link>a {
   color: var(--black);
 
   font-weight: 700;
   text-decoration: none;
+}
+
+@media print {
+  * {
+    /*         background: unset!important; */
+    color: black !important;
+  }
+
+  .poem {
+    /*         padding-top: unset!important; */
+  }
+
+  .poem>p {
+    font-size: 2em !important;
+  }
+
+  .poem>p>span {
+    background-color: white !important;
+    color: #fff !important;
+  }
+
+  .logo {
+    background: red !important;
+    padding: 1em !important;
+    margin-left: -1em !important;
+  }
+
+  .blob-bg-blob {
+    display: none;
+  }
+
+  .poem-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
