@@ -11,8 +11,12 @@ function hideLoader() {
 
 const myLoader = document.getElementById('poetryLoader');
 const items = myLoader.getElementsByTagName('li');
-let activeIndex = 0;
+let activeIndex = getRandomIndex();
 let timeout;
+
+function getRandomIndex() {
+  return Math.floor(Math.random() * items.length);
+}
 
 function setActiveItem(index) {
   for (const item of items) {
@@ -22,7 +26,11 @@ function setActiveItem(index) {
 }
 
 function showNextItem() {
-  activeIndex = (activeIndex + 1) % items.length;
+  let newIndex = getRandomIndex();
+  while (newIndex === activeIndex) {
+    newIndex = getRandomIndex();
+  }
+  activeIndex = newIndex;
   setActiveItem(activeIndex);
 }
 
@@ -51,4 +59,5 @@ document.getElementById('previous').addEventListener('click', () => {
   startAutoSwitch();
 });
 
+setActiveItem(activeIndex);
 startAutoSwitch();
