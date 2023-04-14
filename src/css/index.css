@@ -69,6 +69,7 @@ main {
   display: flex;
   justify-content: center;
   height: 100vh;
+  scroll-behavior: smooth;
 }
 
 .poem {
@@ -88,6 +89,8 @@ main {
   color: var(--white);
   text-shadow: 0 0 0 var(--white);
   transition: text-shadow 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  margin: unset;
+  line-height: 1.5em;
 }
 
 .poem > p.blur {
@@ -107,30 +110,10 @@ main {
 }
 
 .share {
-  transform: translateX(-50%);
-  opacity: 0;
-  display: flex;
-  -moz-column-gap: 2rem;
-  column-gap: 2rem;
   position: absolute;
-  bottom: 0;
-  left: calc(50%);
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-}
-
-.share.show {
-  transform: translate(-50%, -4rem);
-  opacity: 1;
-}
-
-.share > div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 8rem;
-  height: 8rem;
-  border-radius: 50%;
-  background-color: var(--white);
+  bottom: 1em;
+  left: 6.25%;
+  transform: translateX(-50%);
 }
 
 .blob-bg {
@@ -245,7 +228,7 @@ form#poemForm input#theme {
 
 form#poemForm > * {
   border-radius: 0.5rem;
-  border: unset;
+  border: 0;
 }
 
 .output {
@@ -369,5 +352,27 @@ section {
 
 .show {
   display: grid;
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 }
+
+.share img {
+  width: 4em;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+/* #select__spinner .backdrop {
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.select {
+  z-index: 9999;
+} */
